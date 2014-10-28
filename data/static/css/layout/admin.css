@@ -14,17 +14,23 @@ html{
 
 body,html{
 	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+*{
+	margin: 0;
+	padding: 0;
+	text-align: left;
 }
 
 
 .header{
-	height: 31px;
+	height: 62px;
 	position: relative;
-	background: #ccc;
+	background: #444;
 }
 
 .wrapper{
-	padding:10px 0px 60px 0px;
 	overflow:hidden;
 	min-width:980px;
 	max-width:1280px;
@@ -54,7 +60,7 @@ body,html{
 }
 
 .sidebar{
-	float:right;
+	float:left;
 	width:270px;
 	text-align: center;
 	display: inline-block;
@@ -70,4 +76,109 @@ body,html{
 	text-align: right;
 	overflow: hidden;
 	background: #dedede;
+}
+
+/*admin menu*/
+ul.adminMenu
+{
+	height:60px;
+	display: block;
+}
+
+ul.adminMenu li
+{
+	padding:20px 10px 0px 10px;
+	height: 42px;
+	text-align: center;
+	display: inline-block;
+}
+
+ul.adminMenu li a{
+	color: #fff;
+	font-weight: bold;
+	text-decoration: underline;
+	font-size: 14px;
+}
+
+ul.adminMenu li.selected {
+
+	background: #aaa;
+}
+
+ul.adminMenu li.selected a{
+	color: #333;
+	text-decoration: none;
+}
+
+/*admin Categories*/
+
+div.adminCategories
+{
+	text-align: left;
+	background: #ccc;
+}
+
+div.adminCategories h1
+{
+	font-size: 16px;
+	padding: 6px 0 0 10px;
+}
+
+div.adminCategories li{
+	list-style: none;
+}
+
+div.adminCategories ul li
+{
+	margin: 5px 0 0 0;
+	border-top: 1px solid #c0c0c0;
+	height: 30px;
+}
+
+div.adminCategories ul li a
+{
+	margin: 7px 0 0 10px;
+	color: #000;
+	text-decoration: none;
+	width: 100%;
+	display: block;
+}
+
+div.adminCategories ul li.selected
+{
+	background: #555;
+	color:#eee;
+}
+
+
+
+div.adminCategories ul li.add a
+{
+	color: #555;
+}
+
+div.adminCategories ul li.add a span
+{
+	color: #555;
+}
+
+div.adminCategories ul li.selected a
+{
+	color:#eee;
+}
+
+div.adminCategories ul li.selected a span
+{
+	color:#eee;
+}
+/*category Edit*/
+div.adminCategoryEdit
+{
+	margin: 10px;
+}
+
+div.adminCategoryEdit h1
+{
+	font-size: 16px;
+	padding: 6px 0 10px 0;
 }

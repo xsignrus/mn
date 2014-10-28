@@ -1,5 +1,9 @@
 <?php
 namespace Application\BLL;
+/**
+ * Class Factory
+ * @package Application\BLL
+ */
 class Factory extends \Application\Component\Base
 {
 	/**

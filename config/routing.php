@@ -18,7 +18,26 @@ $modules = array(
 		'template'  => 'admin/products',
 		'action'    => 'list',
 		'mode'      => 'admin'
-	)
+	),
+	/**
+	 * Категории меню
+	 */
+	'admin_products_categories' => array(
+		'className' => '\Application\Module\Admin\Products',
+		'template'  => 'admin/products',
+		'action'    => 'list',
+		'mode'      => 'categories'
+	),
+	/**
+	 * Редактирование категории меню
+	 */
+	'admin_products_category_edit' => array(
+		'className' => '\Application\Module\Admin\Products',
+		'template'  => 'admin/products',
+		'action'    => 'edit',
+		'mode'      => 'category'
+	),
+
 );
 
 return array(
@@ -66,7 +85,10 @@ return array(
 			 * Управление меню
 			 */
 			'menu'  => array(
-				''  => 'admin/menu'
+				''  => 'admin/menu',
+				'edit'  => array(
+					''  => 'admin/menu/edit'
+				)
 			)
 		),
 
@@ -79,7 +101,7 @@ return array(
 			'layout'    => 'admin',
 			'title'     => 'Администрирование',
 			'blocks'    => array(
-				'sidebar'   => array(
+				'header'   => array(
 					$modules['admin_menu']
 				)
 			)
@@ -91,11 +113,33 @@ return array(
 			'layout'    => 'admin',
 			'title'     => 'Управление меню',
 			'blocks'    => array(
-				'sidebar'   => array(
+				'header'   => array(
 					$modules['admin_menu']
 				),
 				'content'   => array(
 					$modules['admin_products']
+				),
+				'sidebar'   => array(
+					$modules['admin_products_categories']
+				)
+			)
+		),
+		/**
+		 * Редактирование категории меню
+		 */
+		'admin/menu/edit'=> array(
+			'layout'    => 'admin',
+			'title'     => 'Управление меню',
+			'blocks'    => array(
+				'header'   => array(
+					$modules['admin_menu'],
+				),
+				'content'   => array(
+
+				),
+				'sidebar'   => array(
+					$modules['admin_products_categories'],
+					$modules['admin_products_category_edit']
 				)
 			)
 		),
@@ -106,7 +150,7 @@ return array(
 			'layout'    => 'admin',
 			'title'     => 'Управление пользователями',
 			'blocks'    => array(
-				'sidebar'   => array(
+				'header'   => array(
 					$modules['admin_menu']
 				)
 			)
@@ -118,7 +162,7 @@ return array(
 			'layout'    => 'admin',
 			'title'     => 'Состояние системы',
 			'blocks'    => array(
-				'sidebar'   => array(
+				'header'   => array(
 					$modules['admin_menu']
 				)
 			)

@@ -12,7 +12,9 @@ class Admin extends Base
 	 */
 	public function actionListAdmin()
 	{
-		return array(
+		$selectedItemName   = explode('/', $this->application->request->getUrl());
+		$selectedItemName   = isset($selectedItemName[2]) ? $selectedItemName[2] : '';
+		$data = array(
 			'items' => array(
 				'menu' => array(
 					'title' => 'Меню',
@@ -28,5 +30,12 @@ class Admin extends Base
 				),
 			)
 		);
+
+		if(isset($data['items'][$selectedItemName]))
+		{
+			$data['items'][$selectedItemName]['selected'] = true;
+		}
+
+		return $data;
 	}
 }

@@ -4,7 +4,7 @@ class PDODatabase{
 	/**
 	 * @var PDO
 	 */
-	private $pdo;
+	public $pdo;
 	function __construct(\PDO $database)
 	{
 		$this->pdo = $database;
@@ -41,16 +41,17 @@ class PDODatabase{
 	{
 		$out    = array();
 		$result = $this->query($query, $parameters);
-		while ($data = $result->fetch(\PDO::FETCH_ASSOC)) {
+		while ($data = $result->fetch(\PDO::FETCH_ASSOC))
+		{
 			$out = array_shift($data);
 		}
 		return $out;
 	}
 
-	public function selectRow($query, array $parameters = null, $keyfield = null)
+	public function selectRow($query, array $parameters = null)
 	{
-		$result = $this->sql2array($query, $parameters, $keyfield);
-		return array_shift($result);
+		$result = $this->query($query, $parameters);
+		return $result->fetch(\PDO::FETCH_ASSOC);
 	}
 
 	public function query($query, array $parameters = array())

@@ -3,6 +3,11 @@ namespace Application\BLL;
 
 use Application\Web;
 
+/**
+ * @property Products $products
+ * Class BLL
+ * @package Application\BLL
+ */
 abstract class BLL
 {
 	private $className;

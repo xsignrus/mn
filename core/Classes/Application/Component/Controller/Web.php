@@ -12,8 +12,25 @@ class Web extends Base
 	 */
 	private $data;
 
+	public function processWrite($writeModule)
+	{
+		$moduleName         = explode('/', $writeModule);
+		$moduleClassName    = 'Application\Module\\' .ucfirst($moduleName[0]) . '\\' . ucfirst($moduleName[1]);
+		$module             =  new $moduleClassName($this->application);
+		$writeAction        = 'do' . ucfirst($this->application->request->getPostParam('method'));
+		$module->$writeAction();
+	}
+
 	public function processRequest()
 	{
+		/**
+		 * Модули записи
+		 */
+		if($writeModule = $this->application->request->getPostParam('writemodule'))
+		{
+			$this->processWrite($writeModule);
+		}
+
 		list($pageKey, $urlVariables) = $this->application->routing->getPageKeyAndVariables($this->application->request->getUrl());
 		$pageConfiguration  = $this->application->configuration->getPageConfiguration($pageKey);
 		$data = array();
