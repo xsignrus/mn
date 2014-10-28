@@ -26,7 +26,14 @@ class Web
 
 	public function run()
 	{
+		/**
+		 * Выполняем запрос
+		 */
 		$this->controller->processRequest();
+		/**
+		 * Отрисовываем ответ
+		 */
+		$this->controller->render();
 	}
 
 	public function __get($componentName)

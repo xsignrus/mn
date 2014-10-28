@@ -55,7 +55,13 @@ return array(
 			'layout'    => 'admin',
 			'title'     => 'Администрирование',
 			'blocks'    => array(
-
+				'header'   => array(
+					array(
+						'className' => '\Application\Module\Menu\Admin',
+						'action'    => 'list',
+						'mode'      => 'main'
+					)
+				)
 			)
 		),
 	)

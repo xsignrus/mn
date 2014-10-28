@@ -9,5 +9,8 @@ return array(
 	),
 	'routing'       => array(
 		'className' => '\Application\Component\Routing\Web',
+	),
+	'view'          => array(
+		'className' => '\Application\Component\View\Web',
 	)
 );

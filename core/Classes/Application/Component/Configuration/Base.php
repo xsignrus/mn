@@ -14,6 +14,11 @@ class Base extends \Application\Component\Base
 		$this->configuration = $configuration;
 	}
 
+	public function getRootPath()
+	{
+		return $this->configuration['rootPath'];
+	}
+
 	/**
 	 * @param $pageKey
 	 * @return array
