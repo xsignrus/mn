@@ -14,6 +14,11 @@ class Base extends \Application\Component\Base
 		$this->configuration = $configuration;
 	}
 
+	public function getDbConfiguration($baseName)
+	{
+		return $this->configuration['db'][$baseName];
+	}
+
 	public function getRootPath()
 	{
 		return $this->configuration['rootPath'];
@@ -39,6 +44,15 @@ class Base extends \Application\Component\Base
 	public function getRoutingMap()
 	{
 		return $this->configuration['routing']['map'];
+	}
+
+	public function getBllComponentConfiguration($componentName)
+	{
+		if(!isset($this->configuration['bll'][$componentName]))
+		{
+			throw new \Exception('Cant find configuration for bll component: ' . $componentName);
+		}
+		return $this->configuration['bll'][$componentName];
 	}
 
 	/**

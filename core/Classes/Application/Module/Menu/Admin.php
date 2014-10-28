@@ -10,18 +10,21 @@ class Admin extends Base
 	 * Меню адинистративной части
 	 * @return array
 	 */
-	public function actionListMain()
+	public function actionListAdmin()
 	{
 		return array(
 			'items' => array(
 				'menu' => array(
-					'name' => 'Меню',
+					'title' => 'Меню',
+					'url'   => $this->application->routing->getUrl('admin/menu'),
 				),
 				'table' => array(
-					'name' => 'Состояние ресторана',
+					'title' => 'Состояние ресторана',
+					'url'   => $this->application->routing->getUrl('admin/table'),
 				),
 				'users' => array(
-					'name' => 'Управление пользователями',
+					'title' => 'Управление пользователями',
+					'url'   => $this->application->routing->getUrl('admin/users'),
 				),
 			)
 		);

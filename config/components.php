@@ -12,5 +12,11 @@ return array(
 	),
 	'view'          => array(
 		'className' => '\Application\Component\View\Web',
-	)
+	),
+	'bll'           => array(
+		'className' => '\Application\BLL\Factory',
+	),
+	'db'           => array(
+		'className' => '\Application\Component\Database\Base',
+	),
 );

@@ -5,7 +5,11 @@ use Application\Web;
 
 class Base
 {
-	private $application;
+	/**
+	 * @var Web
+	 */
+	protected $application;
+
 	function __construct(Web $application)
 	{
 		$this->application  = $application;

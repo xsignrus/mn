@@ -6,6 +6,11 @@ use Application\Component\Base;
 
 class Web extends Base
 {
+	public function getUrl($relativeUrl)
+	{
+		return '/' . $relativeUrl;
+	}
+
 	public function getPageKeyAndVariables($requestUri)
 	{
 		$map        = $this->application->configuration->getRoutingMap();

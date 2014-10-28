@@ -1,5 +1,26 @@
 <?php
 
+$modules = array(
+	/**
+	 * Меню сайта в разделе администратора
+	 */
+	'admin_menu' => array(
+		'className' => '\Application\Module\Menu\Admin',
+		'template'  => 'menu',
+		'action'    => 'list',
+		'mode'      => 'admin'
+	),
+	/**
+	 * Модуль управления меню ресторана
+	 */
+	'admin_products'    => array(
+		'className' => '\Application\Module\Admin\Products',
+		'template'  => 'admin/products',
+		'action'    => 'list',
+		'mode'      => 'admin'
+	)
+);
+
 return array(
 	'map'  => array(
 		''      => 'index',
@@ -51,16 +72,54 @@ return array(
 
 	),
 	'pages' => array(
+		/**
+		 * Главная страница администрирования
+		 */
 		'admin' => array(
 			'layout'    => 'admin',
 			'title'     => 'Администрирование',
 			'blocks'    => array(
-				'header'   => array(
-					array(
-						'className' => '\Application\Module\Menu\Admin',
-						'action'    => 'list',
-						'mode'      => 'main'
-					)
+				'sidebar'   => array(
+					$modules['admin_menu']
+				)
+			)
+		),
+		/**
+		 * Управление меню ресторана
+		 */
+		'admin/menu' => array(
+			'layout'    => 'admin',
+			'title'     => 'Управление меню',
+			'blocks'    => array(
+				'sidebar'   => array(
+					$modules['admin_menu']
+				),
+				'content'   => array(
+					$modules['admin_products']
+				)
+			)
+		),
+		/**
+		 * Управление пользователями
+		 */
+		'admin/users' => array(
+			'layout'    => 'admin',
+			'title'     => 'Управление пользователями',
+			'blocks'    => array(
+				'sidebar'   => array(
+					$modules['admin_menu']
+				)
+			)
+		),
+		/**
+		 * Управление состоянием системы
+		 */
+		'admin/table' => array(
+			'layout'    => 'admin',
+			'title'     => 'Состояние системы',
+			'blocks'    => array(
+				'sidebar'   => array(
+					$modules['admin_menu']
 				)
 			)
 		),
