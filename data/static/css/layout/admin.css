@@ -197,11 +197,22 @@ div.adminCategoryEdit
 
 div.adminCategoryEdit h1
 {
-	font-size: 14px;
-	padding: 6px 0 10px 0;
+	font-size: 12px;
+	padding: 10px;
+	color:#888;
 }
-
-/*product list*/
+div.adminCategoryEdit .textinput
+{
+	font-size: 12px;
+	padding: 10px;
+	color:#888;
+}
+div.adminCategoryEdit .submit
+{
+	font-size: 12px;
+	padding: 10px;
+	color:#888;
+}
 
 .adminCategoryProductsList
 {
