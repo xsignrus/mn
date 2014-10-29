@@ -29,7 +29,7 @@ class Paging {
 	function getPages()
 	{
 		$pages = array();
-		for($i = 1; $i < ceil($this->itemsCount/ $this->perPage); $i++)
+		for($i = 1; $i < ceil($this->itemsCount/ $this->perPage)+1; $i++)
 		{
 			$pages[$i] = array(
 				'title' => $i,
