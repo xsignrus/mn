@@ -6,7 +6,7 @@ function templateMenuListAdmin($data)
 	$menuItems = $data['items'];
 	foreach($menuItems as $name => $item)
 	{
-		?><li><a href="<?=$item['url']?>"><?=htmlspecialchars($item['title'])?></a></li><?php
+		?><li <?php if(isset($item['selected'])) echo 'class="selected"'?>><a href="<?=$item['url']?>"><?=htmlspecialchars($item['title'])?></a></li><?php
 	}
 	?></ul><?php
 }

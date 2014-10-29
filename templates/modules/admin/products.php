@@ -50,7 +50,7 @@ function templateProductsEditCategory($data)
 		?><h1>Редактирование категории "<?=!empty($category) ? htmlspecialchars($category['title']) : ''?>"</h1><?php
 	}
 	?>
-	<form method="post" action="<?=$data['currentUrl']?>">
+	<form method="post" action="/">
 		<input type="hidden" name="writemodule" value="admin/products">
 		<input type="hidden" name="method" value="editCategory">
 		<input type="hidden" name="parentId" value="<?=$parentId?>">
