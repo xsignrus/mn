@@ -57,8 +57,13 @@ class PDODatabase{
 	public function query($query, array $parameters = array())
 	{
 		$stmt = $this->pdo->prepare($query);
+		$i  = 1;
+		foreach($parameters as $parameter)
+		{
+			$stmt->bindValue($i++, $parameter, $parameter === (int)$parameter ? \PDO::PARAM_INT : \PDO::PARAM_STR);
+		}
 
-		if ($stmt->execute($parameters))
+		if ($stmt->execute())
 		{
 			return $stmt;
 		}

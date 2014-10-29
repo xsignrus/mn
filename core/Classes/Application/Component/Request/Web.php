@@ -31,6 +31,11 @@ class Web extends Base
 		return isset($this->queryParams[$paramName]) ? $this->queryParams[$paramName] : $defaultValue;
 	}
 
+	public function getQueryParams()
+	{
+		return $this->queryParams;
+	}
+
 	public function getPostParam($paramName, $defaultValue = null)
 	{
 		return isset($this->postParams[$paramName]) ? $this->postParams[$paramName] : $defaultValue;

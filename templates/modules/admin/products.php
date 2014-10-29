@@ -96,10 +96,10 @@ function templateProductsListCategoryProducts($data)
 				<?=htmlspecialchars($product['price_compiled'])?>
 			</div>
 		</div><div class="edit">
-			<div>
+			<div class="editBlock">
 				<a class="icon" href="<?=$product['editUrl']?>">edit</a>
 			</div>
-			<div>
+			<div class="deleteBlock">
 				<a class="icon delete" href="<?=$product['deleteUrl']?>">del</a>
 			</div>
 		</div>
@@ -107,8 +107,9 @@ function templateProductsListCategoryProducts($data)
 		</li><?php
 	}
 	?>
-		<li class="add"><a href="<?=$data['addUrl']?>">Добавить<span>+</span></a></li>
+		<li class="product add"><a href="<?=$data['addUrl']?>">Добавить</a></li>
 	</ul>
+	<?=th_conditions_paging($data['paging'])?>
 	</div><?php
 }
 

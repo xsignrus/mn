@@ -113,10 +113,22 @@ class Products extends BLL
 		);
 	}
 
-	public function getCategoryProducts($categoryId)
+	public function getCategoryProducts($categoryId, $offset = 0, $limit = 100)
 	{
 		return $this->getDbWeb()->selectAll(
-			'SELECT * FROM `product` WHERE `category_id` = ? ORDER BY `id`',
+			'SELECT * FROM `product` WHERE `category_id` = ? ORDER BY `id` LIMIT ?, ?',
+			array(
+				$categoryId,
+				$offset,
+				$limit
+			)
+		);
+	}
+
+	public function getCategoryProductsCount($categoryId)
+	{
+		return $this->getDbWeb()->selectSingle(
+			'SELECT COUNT(1) FROM `product` WHERE `category_id` = ?',
 			array(
 				$categoryId
 			)

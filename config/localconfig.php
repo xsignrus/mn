@@ -3,7 +3,8 @@ return array(
 	'rootPath'      => '/home/sites/memenu.ru/',
 	'autoload'      => array(
 		'directories'   => array(
-			'core/classes'
+			'core',
+			'core/Classes'
 		)
 	),
 	'db' => array(

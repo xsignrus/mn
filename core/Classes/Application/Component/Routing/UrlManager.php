@@ -14,4 +14,16 @@ class UrlManager extends Base
 		$prefix =$this->application->configuration->getRootPath() . 'data/static/upload/' . $this->getProductImagePathPrefix($productId, $categoryId, $timeStamp);
 		return $prefix . $sizeName . '.jpg';
 	}
+
+	public function getCurrentUrl(array $parameters = array())
+	{
+		$params = $this->application->request->getQueryParams();
+		foreach($parameters as $param => $value)
+		{
+			$params[$param] = $value;
+		}
+		$url = $this->application->request->getUrl();
+		list($url, $get) = explode('?' , $url);
+		return $url .'?' . http_build_query($params);
+	}
 }
