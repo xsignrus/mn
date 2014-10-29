@@ -3,6 +3,29 @@
 namespace Application\BLL;
 class Products extends BLL
 {
+	const IMAGE_SMALL       = 1;
+	const IMAGE_NORMAL      = 2;
+	const IMAGE_BIG         = 3;
+	const IMAGE_ORIGINAL    = 4;
+
+	private static $imageSizes = array(
+		self::IMAGE_SMALL => array(
+			'_small',
+			50,
+			50,
+		),
+		self::IMAGE_NORMAL => array(
+			'_normal',
+			300,
+			300,
+		),
+		self::IMAGE_BIG => array(
+			'_big',
+			500,
+			500,
+		),
+	);
+
 	public function update($categoryId, $parentId, $title)
 	{
 		$this->getDbWeb()->query(
@@ -15,6 +38,36 @@ class Products extends BLL
 			)
 		);
 		return $this->getDbWeb()->lastInsertId() ? $this->getDbWeb()->lastInsertId() : $categoryId;
+	}
+
+	public function removeProductImage($productId, $categoryId, $timeStamp)
+	{
+		foreach(self::$imageSizes as $sizes)
+		{
+			$imagePath        = $this->application->urlManager->getProductImagePath($productId, $categoryId, $timeStamp, $sizes[0]);
+			@unlink($imagePath);
+		}
+	}
+
+	public function addProductImage($productId, $categoryId, $timeStamp, $fileName)
+	{
+		$size = getimagesize($fileName);
+
+		foreach(self::$imageSizes as $sizes)
+		{
+			$settings = array(
+				'crop_method'       => 1,
+				'width'             => $size[0],
+				'height'            => $size[1],
+				'width_requested'   => $sizes[1],
+				'height_requested'  => $sizes[2],
+			);
+
+			$imagePath  = $this->application->urlManager->getProductImagePath($productId, $categoryId, $timeStamp, $sizes[0]);
+			$pathInfo   = pathinfo($imagePath);
+			@mkdir($pathInfo['dirname'], 0777, true);
+			$this->application->imageConverter->resize($fileName, $settings, $imagePath);
+		}
 	}
 
 	public function deleteProduct($productId)

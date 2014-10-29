@@ -70,7 +70,8 @@ class Products extends Base
 
 		if(isset($_FILES['image']) && !($_FILES['image']['error']) && $_FILES['image']['size'])
 		{
-			$hasImage = time();
+			$oldImage   = $hasImage;
+			$hasImage   = time();
 		}
 
 		$productData = array(
@@ -92,6 +93,9 @@ class Products extends Base
 
 		if(isset($_FILES['image']) && !($_FILES['image']['error']) && $_FILES['image']['size'])
 		{
+			$this->application->bll->products->removeProductImage($productId, $categoryId, $oldImage);
+			$this->application->bll->products->addProductImage($productId, $categoryId, $hasImage, $_FILES['image']['tmp_name']);
+
 			$size = getimagesize($_FILES['image']['tmp_name']);
 
 			$settings = array(

@@ -19,4 +19,10 @@ return array(
 	'db'           => array(
 		'className' => '\Application\Component\Database\Base',
 	),
+	'urlManager'    => array(
+		'className' => '\Application\Component\Routing\UrlManager',
+	),
+	'imageConverter'    => array(
+		'className' => '\Application\Component\Image\Converter',
+	),
 );
