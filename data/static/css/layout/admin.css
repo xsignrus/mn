@@ -68,6 +68,7 @@ h1{
 	width:270px;
 	text-align: center;
 	display: inline-block;
+	overflow: hidden;
 	background: #dedede;
 }
 
@@ -106,7 +107,7 @@ ul.adminMenu li a{
 
 ul.adminMenu li.selected {
 
-	background: #aaa;
+	background: #ccc;
 }
 
 ul.adminMenu li.selected a{
@@ -183,7 +184,7 @@ div.adminCategoryEdit
 
 div.adminCategoryEdit h1
 {
-	font-size: 16px;
+	font-size: 14px;
 	padding: 6px 0 10px 0;
 }
 
