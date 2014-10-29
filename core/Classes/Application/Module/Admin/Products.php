@@ -65,6 +65,14 @@ class Products extends Base
 			return;
 		}
 
+		$product    = $this->application->bll->products->getProductById($productId);
+		$hasImage   = $product['image'];
+
+		if(isset($_FILES['image']) && !($_FILES['image']['error']) && $_FILES['image']['size'])
+		{
+			$hasImage = time();
+		}
+
 		$productData = array(
 			'id'            => $productId,
 			'categoryId'    => $categoryId,
@@ -73,8 +81,55 @@ class Products extends Base
 			'weight'        => $this->application->request->getPostParam('weight'),
 			'weight_type'   => $this->application->request->getPostParam('weight_type'),
 			'price'         => $this->application->request->getPostParam('price'),
+			'image'         => $hasImage ? $hasImage : 0
 		);
-		$productId  = $this->application->bll->products->insertProduct($productData);
+
+		$productId = $this->application->bll->products->insertProduct($productData);
+		if(!$productId)
+		{
+			$productId = $product['id'];
+		}
+
+		if(isset($_FILES['image']) && !($_FILES['image']['error']) && $_FILES['image']['size'])
+		{
+			$size = getimagesize($_FILES['image']['tmp_name']);
+
+			$settings = array(
+				'crop_method' => 1,
+				'width' => $size[0],
+				'height' => $size[1],
+				'width_requested' => 100,
+				'height_requested' => 100,
+			);
+
+			$settingsSmall = array(
+				'crop_method' => 1,
+				'width' => $size[0],
+				'height' => $size[1],
+				'width_requested' => 300,
+				'height_requested' => 300,
+			);
+
+			$settingsBig = array(
+				'crop_method' => 1,
+				'width' => $size[0],
+				'height' => $size[1],
+				'width_requested' => 500,
+				'height_requested' => 500,
+			);
+
+			$imageFileName  = $categoryId . DIRECTORY_SEPARATOR . $productId % 100 . DIRECTORY_SEPARATOR . $hasImage % 100 . DIRECTORY_SEPARATOR . $hasImage;
+			$imageFileName  = $this->application->configuration->getRootPath() . 'data/static/upload/' . $imageFileName ;
+			$pathInfo   = pathinfo($imageFileName);
+			mkdir($pathInfo['dirname'], 0777, true);
+			move_uploaded_file($_FILES['image']['tmp_name'], $imageFileName. '.jpg');
+
+			ImgResizer::resize($imageFileName.'.jpg', $settings, $imageFileName. '_small.jpg');
+			ImgResizer::resize($imageFileName.'.jpg', $settingsSmall, $imageFileName. '_normal.jpg');
+			ImgResizer::resize($imageFileName.'.jpg', $settingsBig, $imageFileName. '_big.jpg');
+		}
+
+
 		$this->application->request->redirect($this->application->routing->getUrl('admin/menu/products/edit?categoryId=' . $categoryId .'&productId=' . $productId));
 	}
 
@@ -90,6 +145,7 @@ class Products extends Base
 			$product['deleteUrl']       = '#';
 			$product['price_compiled']  = sprintf('%2.2f', $product['price']) . ' руб.';
 			$product['weight_compiled'] = sprintf('%d', $product['weight']) . ' гр.';
+			$product['image_url'] = '/static/upload/' .  $categoryId .'/'. $product['id'] % 100 .'/'. $product['image'] % 100 .'/'. $product['image'] . '_small.jpg';
 		}
 		unset($product);
 
@@ -123,6 +179,11 @@ class Products extends Base
 		$category       = $this->application->bll->products->getCategoryById($categoryId);
 		$product        = $this->application->bll->products->getProductById($productId);
 
+		if($product && $product['image'])
+		{
+			$product['image_url'] = '/static/upload/' . $categoryId . '/' . $productId % 100 . '/' . $product['image'] % 100 . '/' . $product['image'] . '_small.jpg';
+		}
+
 		$data = array(
 			'categoryId'    => $categoryId,
 			'category'      => $category,
@@ -145,4 +206,41 @@ class Products extends Base
 		);
 		return $data;
 	}
+}
+
+class ImgResizer {
+
+	public static function resize($orig_file_path, $settings, $target_file_path) {
+		$quality = 95;
+
+		$crop = $settings['crop_method'];
+		$current_width = $settings['width'];
+		$current_height = $settings['height'];
+		$target_width = min($current_width, $settings['width_requested']);
+		$target_height = min($current_height, $settings['height_requested']);
+
+		if ($crop) {
+			$x_ratio = $target_width / $current_width;
+			$y_ratio = $target_height / $current_height;
+
+			$ratio = min($x_ratio, $y_ratio);
+			$use_x_ratio = ($x_ratio == $ratio);
+			$new_width = $use_x_ratio ? $target_width : floor($current_width * $ratio);
+			$new_height = !$use_x_ratio ? $target_height : floor($current_height * $ratio);
+		} else {
+			$new_width = $target_width;
+			$new_height = $target_height;
+		}
+
+		$im = new \Imagick($orig_file_path);
+
+		$im->cropThumbnailImage($new_width, $new_height);
+		$im->setImageCompression(\Imagick::COMPRESSION_JPEG);
+		$im->setImageCompressionQuality($quality);
+		$im->stripImage();
+		$result = $im->writeImage($target_file_path);
+		$im->destroy();
+		return array($new_width, $new_height, $target_width, $target_height);
+	}
+
 }

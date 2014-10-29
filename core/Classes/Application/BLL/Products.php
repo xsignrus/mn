@@ -33,7 +33,8 @@ class Products extends BLL
 				`description`=?,
 				`weight`=?,
 				`weight_type`=?,
-				`price`=?
+				`price`=?,
+				`image`=?
 				ON DUPLICATE KEY UPDATE
 				`id`=?,
 				`category_id`=?,
@@ -41,7 +42,8 @@ class Products extends BLL
 				`description`=?,
 				`weight`=?,
 				`weight_type`=?,
-				`price`=?
+				`price`=?,
+				`image`=?
 				',
 				array_merge(array_values($data), array_values($data))
 		);
@@ -78,12 +80,12 @@ class Products extends BLL
 		);
 	}
 
-	public function getProductById($categoryId)
+	public function getProductById($productId)
 	{
 		return $this->getDbWeb()->selectRow(
 			'SELECT * FROM `product` WHERE `id` = ?',
 			array(
-				$categoryId
+				$productId
 			)
 		);
 	}

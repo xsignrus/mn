@@ -82,8 +82,9 @@ function templateProductsListCategoryProducts($data)
 	{
 		?>
 		<li class="product">
-		<div class="image">
-
+		<div class="image"><?php if($product['image']){?>
+			<img src="<?=$product['image_url']?>">
+		<?php }?>
 		</div><div class="data">
 			<div class="title">
 				<a href="<?=$product['editUrl']?>"><?=htmlspecialchars($product['title'])?></a>
@@ -127,25 +128,34 @@ function templateProductsEditProduct($data)
 	?>
 
 
-	<form method="post" action="/">
+	<form enctype="multipart/form-data" method="post" action="/">
 		<input type="hidden" name="writemodule" value="admin/products">
 		<input type="hidden" name="method" value="editProduct">
 		<input type="hidden" name="categoryId" value="<?=$data['categoryId']?>">
 		<input type="hidden" name="productId" value="<?=$data['product']['id']?>">
-		<div class="textinput">
-			<input name="title" type="text" value="<?=isset($data['product']['title']) ? htmlspecialchars($data['product']['title']) : ''?>">
+		<div class="image">
+			<input type="file" name="image">
+	<?php if($data['product']['image']){?>
+			<img src="<?=$data['product']['image_url']?>">
+	<?php }?>
 		</div>
-		<div class="areainput">
-			<textarea name="description"><?=isset($data['product']['description']) ? htmlspecialchars($data['product']['description']) : '';?></textarea>
-		</div>
-		<div class="halfcontainer">
-			<div class="half">
-				<input name="weight" type="text" value="<?=isset($data['product']['title']) ? htmlspecialchars($data['product']['weight']) : ''?>">
+		<div class="data">
+			<div class="textinput">
+				<input name="title" type="text" value="<?=isset($data['product']['title']) ? htmlspecialchars($data['product']['title']) : ''?>">
 			</div>
-			<div class="half">
-				<input name="price" type="text" value="<?=isset($data['product']['title']) ? htmlspecialchars($data['product']['price']) : ''?>">
+			<div class="areainput">
+				<textarea name="description"><?=isset($data['product']['description']) ? htmlspecialchars($data['product']['description']) : '';?></textarea>
+			</div>
+			<div class="halfcontainer">
+				<div class="half">
+					<input name="weight" type="text" value="<?=isset($data['product']['title']) ? htmlspecialchars($data['product']['weight']) : ''?>">
+				</div>
+				<div class="half">
+					<input name="price" type="text" value="<?=isset($data['product']['title']) ? htmlspecialchars($data['product']['price']) : ''?>">
+				</div>
 			</div>
 		</div>
+
 		<div class="submit">
 			<input type="submit" value="Сохранить">
 			<input type="submit" name="delete" value="Удалить">
