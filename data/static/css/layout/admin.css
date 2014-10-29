@@ -215,9 +215,10 @@ div.adminCategoryEdit h1
 	height:100px;
 	display: inline-block;
 	list-style: none;
-	border: 1px solid #ccc;
+	border: 0px solid #ccc;
 	overflow: hidden;
 	background:#fff;
+	box-shadow:0 1px 2px #ccc;
 }
 
 .adminCategoryProductsList ul li.product .image,
@@ -272,16 +273,25 @@ div.adminCategoryEdit h1
 	position: relative;
 }
 
-.adminCategoryProductsList ul li.product .edit div
+.adminCategoryProductsList ul li.product .edit .editBlock
 {
-	width: 48px;
-	height: 48px;
+	width: 50px;
+	height: 50px;
 	display: block;
 	vertical-align: middle;
 	text-align: center;
 	position: relative;
-	border: 1px solid #32cc7f;
-	background:#00c060;
+	background:#4cd24c;
+}
+.adminCategoryProductsList ul li.product .edit .deleteBlock
+{
+	width: 50px;
+	height: 50px;
+	display: block;
+	vertical-align: middle;
+	text-align: center;
+	position: relative;
+	background:#d24c4c;
 }
 
 .adminCategoryProductsList ul li.product .edit div a
