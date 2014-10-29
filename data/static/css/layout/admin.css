@@ -1,6 +1,8 @@
+@import "http://webfonts.ru/import/fira.css";
+
 body{
 	font-size:12px;
-	font-family: Arial, Tahoma, Georgia;
+	font-family: 'Fira Sans';
 	margin: 0;
 	padding: 0;
 	border-collapse: collapse;
@@ -24,14 +26,19 @@ body,html{
 }
 
 h1{
-	font-size:16px;
+	font-size:18px;
+	font-weight:400;
 }
 
 
 .header{
-	height: 62px;
+	height: 60px;
+	line-height:60px;
 	position: relative;
 	background: #444;
+}
+.header a{
+	text-decoration:none;
 }
 
 .wrapper{
@@ -92,21 +99,22 @@ ul.adminMenu
 
 ul.adminMenu li
 {
-	padding:20px 10px 0px 10px;
-	height: 42px;
+	padding:0 20px;
 	text-align: center;
 	display: inline-block;
 }
-
+ul.adminMenu li:hover
+{
+	background:#666;
+}
 ul.adminMenu li a{
 	color: #fff;
-	font-weight: bold;
-	text-decoration: underline;
-	font-size: 14px;
+	font-weight: 400;
+	text-decoration: none;
+	font-size: 12px;
 }
 
 ul.adminMenu li.selected {
-
 	background: #ccc;
 }
 
@@ -120,7 +128,7 @@ ul.adminMenu li.selected a{
 div.adminCategories
 {
 	text-align: left;
-	background: #ccc;
+	background: #f5f5f5;
 }
 
 div.adminCategories h1
@@ -135,15 +143,19 @@ div.adminCategories li{
 
 div.adminCategories ul li
 {
-	margin: 5px 0 0 0;
-	border-top: 1px solid #c0c0c0;
-	height: 30px;
+	border-top: 1px solid #fff;
+	border-bottom:1px solid #ccc;
+	height:auto;
+	padding:10px;
 }
-
+div.adminCategories ul li:hover
+{
+	background: #eee;
+}
 div.adminCategories ul li a
 {
-	margin: 7px 0 0 10px;
-	color: #000;
+
+	color: #999;
 	text-decoration: none;
 	width: 100%;
 	display: block;
@@ -151,15 +163,16 @@ div.adminCategories ul li a
 
 div.adminCategories ul li.selected
 {
-	background: #555;
+	background: #00c0c0;
 	color:#eee;
+	padding:10px;
 }
 
 
 
 div.adminCategories ul li.add a
 {
-	color: #555;
+	color: #;
 }
 
 div.adminCategories ul li.add a span
@@ -202,8 +215,9 @@ div.adminCategoryEdit h1
 	height:100px;
 	display: inline-block;
 	list-style: none;
-	border: 1px solid #333;
+	border: 1px solid #ccc;
 	overflow: hidden;
+	background:#fff;
 }
 
 .adminCategoryProductsList ul li.product .image,
@@ -228,6 +242,21 @@ div.adminCategoryEdit h1
 	float: left;
 	height: 100%;
 }
+.adminCategoryProductsList ul li.product .data .title
+{
+	margin:5px;
+	font-size:14px;
+}
+.adminCategoryProductsList ul li.product .data .weight
+{
+	margin:5px;
+	font-weight:200;
+	font-style:italic;
+}
+.adminCategoryProductsList ul li.product .data .title a{
+	text-decoration:none;
+	color:#555
+}
 
 .adminCategoryProductsList ul li.product .data .price
 {
@@ -251,7 +280,8 @@ div.adminCategoryEdit h1
 	vertical-align: middle;
 	text-align: center;
 	position: relative;
-	border: 1px solid #666;
+	border: 1px solid #32cc7f;
+	background:#00c060;
 }
 
 .adminCategoryProductsList ul li.product .edit div a
