@@ -23,6 +23,10 @@ body,html{
 	text-align: left;
 }
 
+h1{
+	font-size:16px;
+}
+
 
 .header{
 	height: 62px;
@@ -181,4 +185,78 @@ div.adminCategoryEdit h1
 {
 	font-size: 16px;
 	padding: 6px 0 10px 0;
+}
+
+/*product list*/
+
+.adminCategoryProductsList
+{
+	padding: 10px 0 0 10px;
+	display: inline-block;
+}
+
+.adminCategoryProductsList ul li.product
+{
+	width: 330px;
+	height:100px;
+	display: inline-block;
+	list-style: none;
+	border: 1px solid #333;
+	overflow: hidden;
+}
+
+.adminCategoryProductsList ul li.product .image,
+.adminCategoryProductsList ul li.product .data,
+.adminCategoryProductsList ul li.product .edit
+{
+	display: inline-block;
+}
+
+.adminCategoryProductsList ul li.product .image
+{
+	width: 100px;
+	height: 100px;
+	background: #222;
+	float: left;
+}
+
+.adminCategoryProductsList ul li.product .data
+{
+	width: 180px;
+	position: relative;
+	float: left;
+	height: 100%;
+}
+
+.adminCategoryProductsList ul li.product .data .price
+{
+	position: absolute;
+	bottom: 0px;
+	right: 10px;
+}
+
+.adminCategoryProductsList ul li.product .edit
+{
+	width: 50px;
+	background: #222;
+	position: relative;
+}
+
+.adminCategoryProductsList ul li.product .edit div
+{
+	width: 48px;
+	height: 48px;
+	display: block;
+	vertical-align: middle;
+	text-align: center;
+	position: relative;
+	border: 1px solid #666;
+}
+
+.adminCategoryProductsList ul li.product .edit div a
+{
+	position: absolute;
+	top:20px;
+	left:10px;
+	color: #fff;
 }

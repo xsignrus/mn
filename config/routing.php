@@ -37,7 +37,24 @@ $modules = array(
 		'action'    => 'edit',
 		'mode'      => 'category'
 	),
-
+	/**
+	 * Редактирование блюда меню
+	 */
+	'admin_product_edit' => array(
+		'className' => '\Application\Module\Admin\Products',
+		'template'  => 'admin/products',
+		'action'    => 'edit',
+		'mode'      => 'product'
+	),
+	/**
+	 * Список блюд в категории
+	 */
+	'admin_category_products' => array(
+		'className' => '\Application\Module\Admin\Products',
+		'template'  => 'admin/products',
+		'action'    => 'list',
+		'mode'      => 'categoryProducts'
+	),
 );
 
 return array(
@@ -87,8 +104,13 @@ return array(
 			'menu'  => array(
 				''  => 'admin/menu',
 				'edit'  => array(
-					''  => 'admin/menu/edit'
-				)
+					''  => 'admin/menu/edit',
+				),
+				'products'  => array(
+					'edit'  =>  array(
+						''  => 'admin/menu/product/edit',
+					)
+				),
 			)
 		),
 
@@ -135,11 +157,29 @@ return array(
 					$modules['admin_menu'],
 				),
 				'content'   => array(
-
+					$modules['admin_category_products'],
 				),
 				'sidebar'   => array(
 					$modules['admin_products_categories'],
 					$modules['admin_products_category_edit']
+				)
+			)
+		),
+		/**
+		 * Редактирование блюда
+		 */
+		'admin/menu/product/edit'=> array(
+			'layout'    => 'admin',
+			'title'     => 'Управление меню',
+			'blocks'    => array(
+				'header'   => array(
+					$modules['admin_menu'],
+				),
+				'content'   => array(
+					$modules['admin_product_edit'],
+				),
+				'sidebar'   => array(
+					$modules['admin_products_categories'],
 				)
 			)
 		),
